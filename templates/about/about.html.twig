@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="mb-4 text-center">À propos de GameStore</h2>
+            <p class="lead text-center">
+                GameStore est une boutique en ligne moderne dédiée aux jeux vidéo, consoles, accessoires et abonnements.<br>
+            </p>
+           
+            <div class="text-center text-muted small">
+                &copy; {{ "now"|date("Y") }} GameStore. Tous droits réservés.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

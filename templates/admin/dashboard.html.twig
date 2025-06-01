@@ -1,0 +1,55 @@
+{# filepath: c:\Users\louay\Desktop\dev web\projet\my_project_directory\templates\admin\dashboard.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard Admin{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h2 class="mb-4 text-center">Tableau de bord - Commandes validées</h2>
+
+    {% if commandes is empty %}
+        <div class="alert alert-info text-center">Aucune commande validée pour le moment.</div>
+    {% else %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Utilisateur</th>
+                        <th>Email</th>
+                        <th>Date</th>
+                        <th>Produits</th>
+                        <th>Total</th>
+                        <th>Adresse</th>
+                        <th>Paiement</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for commande in commandes %}
+                    <tr>
+                        <td>{{ commande.id }}</td>
+                        <td>{{ commande.user.nom ?? '-' }}</td>
+                        <td>{{ commande.user.email ?? '-' }}</td>
+                        <td>{{ commande.createdAt|date('d/m/Y H:i') }}</td>
+                        <td>
+                            <ul class="mb-0">
+                                {% for produit in commande.produits %}
+                                    <li>
+                                        {{ produit.title }}
+                                        <span class="text-muted">({{ produit.price }} DT)</span>
+                                        <span class="badge bg-secondary ms-1">x{{ produit.quantity ?? 1 }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>{{ commande.total }} DT</td>
+                        <td>{{ commande.adresse }}</td>
+                        <td>{{ commande.paiement|capitalize }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
